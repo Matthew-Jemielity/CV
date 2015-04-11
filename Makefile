@@ -1,12 +1,15 @@
 # need to compile aux, then recompile the desired format
 aux:
-	latex cv.tex
+	@latex cv.tex
 
 dvi: aux
-	latex cv.tex
+	@latex cv.tex
+
+ps: aux dvi
+	@dvi2ps -c cv.ps cv.dvi
 
 pdf: aux
-	pdflatex cv.tex
+	@pdflatex cv.tex
 
 clean:
-	@rm -f *.aux *.dvi *.log *.pdf
+	@rm -f *.aux *.dvi *.log *.pdf *.ps

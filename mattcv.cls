@@ -9,8 +9,6 @@
     \fontsize{10pt}{12pt}
     \selectfont
 }
-\setlength{\textwidth}{6.5in}
-\setlength{\textheight}{8in}
 \pagenumbering{arabic}
 
 \DeclareOption*{
@@ -18,12 +16,16 @@
 }
 \ProcessOptions\relax
 
+\RequirePackage{calc}
+\newlength{\cvhead}
+\setlength{\cvhead}{3.5cm}
+\newlength{\cvmargin}
+\setlength{\cvmargin}{0.5cm}
+
 \RequirePackage[
     a4paper,
-    margin = 1cm,
-    head = 4cm,
-    headsep = 1cm,
-    includehead
+    margin = \cvmargin,
+    top = \cvhead
 ]{geometry}
 
 %%%%%%%%%%
@@ -38,33 +40,58 @@
 \definecolor{darkgray}{RGB}{64,64,64}
 \definecolor{black}{RGB}{0,0,0}
 
-\definecolor{pastelred}{RGB}{205,155,155}
-\definecolor{pastelgreen}{RGB}{143,188,143}
-\definecolor{pastelblue}{RGB}{176,196,222}
-\definecolor{pastelorange}{RGB}{227,168,105}
-\definecolor{pastelpurple}{RGB}{147,112,219}
-
 %%%%%%%%%%
 % header %
 %%%%%%%%%%
 
+\RequirePackage{anyfontsize}
+\RequirePackage{graphicx}
 \RequirePackage{tikz}
 \usetikzlibrary{positioning}
-\RequirePackage{anyfontsize}
 
-\newcommand{\cvheader}[3]{%
+% arguments:
+% 1. first name(s)
+% 2. last name
+% 3. names fontsize
+% 4. job title
+% 5. job title fontsize
+% 6. eps picture filepath
+\newcommand{\cvheader}[6]{%
     \begin{tikzpicture}[remember picture,overlay]
+        \tikzset{shift={(current page.north west)}, yshift=-\cvhead}
         \fill [black]
-            (current page.north west) rectangle (\paperwidth,\topmargin + \headheight);
+            (0,0) rectangle (\paperwidth,\cvhead);
         \path
-            (current page.north east) -- (\paperwidth,\topmargin + \headheight)
+            (\paperwidth,0) -- (\paperwidth,\cvhead)
             node (cv header east edge) [midway] {};
+        \path
+            (0,0) -- (0,\cvhead)
+            node (cv header west edge) [midway] {};
         \node (cv header text) [align=right, left=of cv header east edge] {%
-                \textcolor{gray}{\fontsize{32}{0}\selectfont \MakeLowercase{#1 \textbf{#2}}}
-                \\
-                \textcolor{lightgray}{\fontsize{20}{0}\selectfont \MakeLowercase{#3}}
-            };
+            \textcolor{gray}{\fontsize{#3}{0}\selectfont \MakeLowercase{#1 \textbf{#2}}}
+            \\
+            \textcolor{lightgray}{\fontsize{#5}{0}\selectfont \MakeLowercase{\textbf{#4}}}
+        };
+        \node (cv header pic background) [
+            right=of cv header west edge,
+            minimum height=0.95\cvhead,
+            minimum width=0.95\cvhead
+        ] {};
+        \node (cv header pic) at (cv header pic background) [] {%
+            \includegraphics[height=0.9\cvhead]{#6}
+        };
+        \fill [black, even odd rule]
+            (cv header pic background) circle (0.33\cvhead)
+            (cv header pic background.north west) rectangle (cv header pic background.south east);
     \end{tikzpicture}
 }
 
+% arguments:
+% 1. section name
+% 2. section color
+% 3. date from
+% 4. date to
+% 5. formatted text
+\newcommand{\cvtimeline}[5]{%
+}
 
