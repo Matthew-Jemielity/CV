@@ -137,7 +137,7 @@
         coltitle=title,
         colupper=title,
         boxrule=0pt,
-        title={\fontsize{14}{0}\selectfont\MakeLowercase{\textbf{#1}}},
+        title={\fontsize{14}{0}\selectfont\textbf{#1}},
         bottomtitle=1mm,
         toptitle=1mm,
         sidebyside,
