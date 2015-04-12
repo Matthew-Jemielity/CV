@@ -12,4 +12,4 @@ pdf: aux
 	@pdflatex cv.tex
 
 clean:
-	@rm -f *.aux *.dvi *.log *.pdf *.ps
+	@rm -f *.aux *.dvi *.log *.out *.pdf *.ps

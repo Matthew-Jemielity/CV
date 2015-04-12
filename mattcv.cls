@@ -38,8 +38,9 @@
 \definecolor{job}{RGB}{236,240,241}
 \definecolor{name}{RGB}{189,195,199}
 \definecolor{page}{RGB}{236,240,241}
+\definecolor{section}{RGB}{250,250,250}
+\definecolor{timeline}{RGB}{255,255,255}
 \definecolor{title}{RGB}{236,240,241}
-\definecolor{section}{RGB}{255,255,255}
 
 \RequirePackage{pagecolor}
 \pagecolor{page}
@@ -132,7 +133,7 @@
         arc=0mm,
         bicolor,
         colback=#2,
-        colbacklower=section,
+        colbacklower=timeline,
         colframe=#2,
         coltitle=title,
         colupper=title,
