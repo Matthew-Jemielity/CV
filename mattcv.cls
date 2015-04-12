@@ -32,13 +32,14 @@
 % colors %
 %%%%%%%%%%
 
-\RequirePackage{xcolor}
+\RequirePackage[table]{xcolor}
 
-\definecolor{section}{RGB}{255,255,255}
-\definecolor{page}{RGB}{236,240,241}
+\definecolor{header}{RGB}{44,44,44}
 \definecolor{job}{RGB}{236,240,241}
 \definecolor{name}{RGB}{189,195,199}
-\definecolor{header}{RGB}{44,44,44}
+\definecolor{page}{RGB}{236,240,241}
+\definecolor{title}{RGB}{236,240,241}
+\definecolor{section}{RGB}{255,255,255}
 
 \RequirePackage{pagecolor}
 \pagecolor{page}
@@ -97,10 +98,10 @@
     \end{tikzpicture}
 }
 
-\RequirePackage{tcolorbox}
+\RequirePackage[most]{tcolorbox}
 
 % arguments:
-% 1. section name
+% 1. section title
 % 2. section color
 % 3. formatted text
 \newcommand{\cvsection}[3]{%
@@ -108,21 +109,47 @@
         arc=0mm,
         colback=section,
         colframe=#2,
-        bottomrule=0pt,
-        leftrule=0pt,
-        rightrule=0pt,
-        title={\fontsize{24}{0}\selectfont\MakeLowercase{\textbf{#1}}}
+        coltitle=title,
+        boxrule=0pt,
+        title={\fontsize{14}{0}\selectfont\MakeLowercase{\textbf{#1}}},
+        bottomtitle=1mm,
+        toptitle=1mm
     ]
         #3
     \end{tcolorbox}
 }
 
+\tcbuselibrary{hooks}
+
 % arguments:
-% 1. section name
+% 1. section title
 % 2. section color
 % 3. date from
 % 4. date to
 % 5. formatted text
 \newcommand{\cvtimeline}[5]{%
+    \begin{tcolorbox}[
+        arc=0mm,
+        bicolor,
+        colback=#2,
+        colbacklower=section,
+        colframe=#2,
+        coltitle=title,
+        colupper=title,
+        boxrule=0pt,
+        title={\fontsize{14}{0}\selectfont\MakeLowercase{\textbf{#1}}},
+        bottomtitle=1mm,
+        toptitle=1mm,
+        sidebyside,
+        lefthand width=8mm
+    ]
+        \begin{tabular}{ c }
+            \fontsize{10}{0}\selectfont\textbf{#4} \\
+            \fontsize{12}{0}\selectfont\textbf{$\uparrow$} \\
+            \fontsize{10}{0}\selectfont\textbf{#3} \\
+        \end{tabular}
+        \tcblower
+        #5
+    \end{tcolorbox}
 }
 

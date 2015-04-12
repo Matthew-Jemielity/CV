@@ -3,9 +3,11 @@
 \usepackage{xcolor}
 % flat ui colors
 \definecolor{alizarin}{RGB}{231,76,60}
+\definecolor{belizehole}{RGB}{41,128,185}
+\definecolor{carrot}{RGB}{230,126,34}
 \definecolor{emerald}{RGB}{46,204,113}
+\definecolor{nephritis}{RGB}{39,174,96}
 \definecolor{peterriver}{RGB}{52,152,220}
-\definecolor{sunflower}{RGB}{241,196,15}
 \definecolor{turquoise}{RGB}{26,188,156}
 \definecolor{wetasphalt}{RGB}{52,73,94}
 
@@ -20,9 +22,14 @@
         {matt.eps} % eps picture filepath
 
     \cvsection{contact}{wetasphalt}{Lorem ipsum...}
-    \cvsection{about}{peterriver}{Lorem ipsum...}
-    \cvsection{work}{emerald}{Lorem ipsum...}
-    \cvsection{education}{turquoise}{Lorem ipsum...}
+    \cvsection{about}{carrot}{Lorem ipsum...}
+    \cvsection{work}{emerald}{%
+        \cvtimeline{test 1}{nephritis}{2013}{2015}{Lorem ipsum...}
+        \cvtimeline{test 2}{nephritis}{2009}{2013}{Lorem ipsum...}
+    }
+    \cvsection{education}{peterriver}{%
+        \cvtimeline{test 1}{belizehole}{2004}{2009}{Lorem ipsum...}
+    }
     \cvsection{skills}{alizarin}{Lorem ipsum...}
 
 \end{document}
