@@ -11,11 +11,14 @@
 \definecolor{turquoise}{RGB}{26,188,156}
 \definecolor{wetasphalt}{RGB}{52,73,94}
 
+\usepackage{caption}
 \usepackage{dirtytalk}
+\usepackage{everypage}
 \usepackage[colorlinks=true, urlcolor=wetasphalt]{hyperref}
+\usepackage{pgf-pie}
+\usepackage{tikz}
 
-\begin{document}
-
+\AddEverypageHook{%
     \cvheader
         {Mateusz} % first name(s)
         {Jemielity} % last name
@@ -23,20 +26,25 @@
         {Software Engineer} % job title
         {20.3} % job title fontsize
         {matt.eps} % eps picture filepath
+    }
 
-    \cvsection{contact}{wetasphalt}{Lorem ipsum...}
+\begin{document}
+
+    \cvsection{contact}{wetasphalt}{Line 1\\Line 2\\Line 3}
     \cvsection{about}{carrot}{%
-        \say{When you solve a puzzle the world makes sense and everything feels right.} (House MD)\\
-        Thus I solve puzzles. Mainly from domains of computer science and software engineering. The more I know, the more interesting puzzles I can tackle. I wand to know (and solve) everything, in time.\\
+        \say{When you solve a puzzle the world makes sense and everything feels right.} (House MD)
+        \par
+        Thus I solve puzzles. Mainly from domains of computer science and software engineering. The more I know, the more interesting puzzles I can tackle. I wand to know (and solve) everything, in time.
+        \par
         I'm an enthusiastic programmer and C is my language of choice, though I don't shy away from different ones. During my career I went from debugging to writing drivers, from making Linux kernel boot on new devices, to contributing to ambitious userland projects. I'm looking for an opportunity to expand my knowledge of the field and a chance to polish my skills.
     }
     \cvsection{experience}{emerald}{%
         \cvtimeline{\textbf{Software Engineer}, Samsung Electronics Poland R\&D Center}{nephritis}{2013}{2015}{%
             \begin{itemize}
                 \item contributed to internal projects ranging from performance benchmarking to structured light 3D scanning
-                \item investigated performance- and power consumption-related issues
-                \item developed Linux kernel drivers and userland applications
-                \item worked in C, Java and Python
+                \item investigated performance- and power consumption-related issues in ARM-based embedded systems
+                \item developed Linux kernel drivers and userland applications for Android OS and GNU/Linux
+                \item worked in C, C++, Java and Python
             \end{itemize}
         }
         \cvtimeline{\textbf{Junior Software Engineer}, Samsung Electronics Poland R\&D Center}{nephritis}{2009}{2013}{%
@@ -45,7 +53,7 @@
                 \item worked as a part of international team, recognized as top contributor
                 \item handled bringup of Linux kernel on new ARM-based hardware
                 \item implemented new features across proprietary bootloader, L4-based RTOS, Android OS
-                \item worked mainly in C
+                \item worked with ARM-based embeded systems, mainly in C
             \end{itemize}
         }
     }
@@ -58,7 +66,26 @@
             \end{itemize}
         }
     }
-    \cvsection{skills}{alizarin}{Lorem ipsum...}
+    \cvsection{skills}{alizarin}{%
+        \begin{center}
+            \begin{tikzpicture}
+                \pie[
+                    color={peterriver, emerald, alizarin, turquoise, carrot},
+                    radius=2,
+                    text=legend
+                ]{65/C, 10/C++, 5/Java, 10/Python, 10/shell script}
+                \node [below=2, align=flush center] {language preference};
+            \end{tikzpicture}
+            \begin{tikzpicture}
+                \pie[
+                    color={turquoise, carrot, emerald, peterriver, alizarin},
+                    radius=2,
+                    text=legend
+                ]{3/Android Studio, 15/Eclipse, 6/Qt, 70/vim + gcc + gdb, 6/Visual Studio}
+                \node [below=2, align=flush center] {development environment preference};
+            \end{tikzpicture}
+        \end{center}
+    }
 
 \end{document}
 

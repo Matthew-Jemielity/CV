@@ -25,7 +25,7 @@
 \RequirePackage[
     a4paper,
     margin = \cvmargin,
-    top = \cvhdr
+    top = \cvhdr + \cvmargin
 ]{geometry}
 
 %%%%%%%%%%
