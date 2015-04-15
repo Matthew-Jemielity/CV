@@ -11,10 +11,11 @@
 \definecolor{turquoise}{RGB}{26,188,156}
 \definecolor{wetasphalt}{RGB}{52,73,94}
 
-\usepackage{caption}
+\usepackage{bbding}
 \usepackage{dirtytalk}
 \usepackage{everypage}
 \usepackage[colorlinks=true, urlcolor=wetasphalt]{hyperref}
+\usepackage[alpine, misc]{ifsym}
 \usepackage{pgf-pie}
 \usepackage{tikz}
 
@@ -30,7 +31,12 @@
 
 \begin{document}
 
-    \cvsection{contact}{wetasphalt}{Line 1\\Line 2\\Line 3}
+    \cvsection{contact}{wetasphalt}{%
+        \begin{center}
+            \FilledHut\hspace{2mm}Warszawa, Polska\hspace{1cm}\PhoneHandset\hspace{2mm}+48000000000\hspace{1cm}\Letter\hspace{2mm}...@gmail.com\\
+            \href{https://google.com/+MateuszJemielity/about}{Google+}\hspace{1cm}\href{https://github.com/Matthew-Jemielity}{Github}
+        \end{center}
+    }
     \cvsection{about}{carrot}{%
         \say{When you solve a puzzle the world makes sense and everything feels right.} (House MD)
         \par
