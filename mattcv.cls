@@ -5,6 +5,8 @@
 % basics %
 %%%%%%%%%%
 
+\LoadClassWithOptions{article}
+
 \renewcommand{\normalsize}{%
     \fontsize{10pt}{12pt}
     \selectfont
@@ -20,13 +22,16 @@
 \newlength{\cvhdr}
 \setlength{\cvhdr}{3cm}
 \newlength{\cvmargin}
-\setlength{\cvmargin}{0.5cm}
+\setlength{\cvmargin}{4mm}
 
 \RequirePackage[
     a4paper,
     margin = \cvmargin,
     top = \cvhdr + \cvmargin
 ]{geometry}
+
+\RequirePackage{enumitem}
+\setlist{nosep, leftmargin=\cvmargin}
 
 %%%%%%%%%%
 % colors %
@@ -99,6 +104,10 @@
     \end{tikzpicture}
 }
 
+%%%%%%%%%%%%
+% sections %
+%%%%%%%%%%%%
+
 \RequirePackage[most]{tcolorbox}
 
 % arguments:
@@ -114,7 +123,9 @@
         boxrule=0pt,
         title={\fontsize{14}{0}\selectfont\MakeLowercase{\textbf{#1}}},
         bottomtitle=1mm,
-        toptitle=1mm
+        toptitle=1mm,
+        bottom=1mm,
+        top=1mm
     ]
         #3
     \end{tcolorbox}
@@ -141,8 +152,10 @@
         title={\fontsize{14}{0}\selectfont\textbf{#1}},
         bottomtitle=1mm,
         toptitle=1mm,
+        bottom=1mm,
+        top=1mm,
         sidebyside,
-        lefthand width=8mm
+        lefthand width=12mm  % width of the timeline column
     ]
         \begin{tabular}{ c }
             \fontsize{10}{0}\selectfont\textbf{#4} \\
