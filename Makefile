@@ -1,3 +1,5 @@
+all: pdf
+
 # need to compile aux, then recompile the desired format
 aux: latex
 	@latex cv.tex
