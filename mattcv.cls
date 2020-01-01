@@ -39,6 +39,20 @@
 
 \def\basiceval#1{\the\numexpr#1\relax}
 
+\RequirePackage{fp}
+\def\calcLength(#1,#2)#3{%
+  \pgfpointdiff{\pgfpointanchor{#1}{center}}%
+  {\pgfpointanchor{#2}{center}}%
+  \pgf@xa=\pgf@x%
+  \pgf@ya=\pgf@y%
+  \FPeval\@temp@a{\pgfmath@tonumber{\pgf@xa}}%
+  \FPeval\@temp@b{\pgfmath@tonumber{\pgf@ya}}%
+  \FPeval\@temp@sum{(\@temp@a*\@temp@a+\@temp@b*\@temp@b)}%
+  \FProot{\FPMathLen}{\@temp@sum}{2}%
+  \FPround\FPMathLen\FPMathLen5\relax
+  \global\expandafter\edef\csname #3\endcsname{\FPMathLen}
+}
+
 %%%%%%%%%%
 % colors %
 %%%%%%%%%%
@@ -74,6 +88,8 @@
 \RequirePackage{graphicx}
 \RequirePackage{tikz}
 \usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
 
 % arguments:
 % 1. eps picture filepath
@@ -211,10 +227,12 @@
 % 4. date to
 % 5. formatted text
 \newcommand{\cvtimeline}[5]{%
+  \colorlet{darker-back}{#2!80!black}
   \begin{tcolorbox}[
+    enhanced,
     arc=0mm,
     bicolor,
-    colback=#2,
+    colback=darker-back,
     colbacklower=timeline,
     colframe=#2,
     coltitle=title,
@@ -226,12 +244,56 @@
     bottom=1mm,
     top=1mm,
     sidebyside,
-    lefthand width=12mm  % width of the timeline column
+    left=4mm,
+    right=4mm,
+    lefthand width=12mm, % the timeline column (+ text width?)
+    overlay={
+      \begin{tcbclipinterior}
+        \coordinate (arrow box north west) at (interior.north west);
+        \coordinate
+          [right=22mm]
+            (arrow box north east) at (arrow box north west);
+        \coordinate
+          (arrow box north middle)
+            at ($(arrow box north west)!0.5!(arrow box north east)$);
+        \coordinate (arrow box south west) at (interior.south west);
+        \coordinate
+          [right=22mm]
+            (arrow box south east) at (arrow box south west);
+        \coordinate
+          (arrow box south middle)
+            at ($(arrow box south west)!0.5!(arrow box south east)$);
+        \path
+          (arrow box north west) -- (arrow box north east)
+            node (arrow north edge) [] {};
+        \path
+          (arrow box south west) -- (arrow box south east)
+            node (arrow south edge) [] {};
+        \path
+          (arrow box north west) -- (arrow box south west)
+            node (arrow west edge) [] {};
+        \path
+          (arrow box north east) -- (arrow box south east)
+            node (arrow east edge) [] {};
+        \calcLength
+          (arrow box north west,arrow box north east)
+            {arrowboxwidth};
+        \draw
+          [
+            color=#2,
+            line width=\arrowboxwidth,
+            {Triangle Cap[reversed,cap angle=140]}-{Triangle Cap [cap angle=140]}
+          ]
+          (arrow box south middle) -- (arrow box north middle);
+      \end{tcbclipinterior}
+    }
   ]
     \begin{tabular}{ c }
+        \newline \\
         \fontsize{10}{0}\selectfont\textbf{#4} \\
-        \fontsize{12}{0}\selectfont\textbf{$\uparrow$} \\
+        \newline \\
         \fontsize{10}{0}\selectfont\textbf{#3} \\
+        \newline \\
     \end{tabular}
     \tcblower
     #5

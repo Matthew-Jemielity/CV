@@ -1,3 +1,4 @@
 # CV
 My personal CV style.
-Uses pgf-pie (https://code.google.com/p/pgf-pie/). With imminent closure of Google Code I decided to include the *.sty file itelf. Many thanks for the author of this great package.
+Makefile usable on Debian/Ubuntu; if no latex found, installs backported latest
+texlive from 3rd-party PPA. Depends on tikz/pgf3.0 arrows.meta.

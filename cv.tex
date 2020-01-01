@@ -13,7 +13,6 @@
 \usepackage{dirtytalk}
 \usepackage{everypage}
 \usepackage[alpine, misc]{ifsym}
-\usepackage{pgf-pie}
 \usepackage{tikz}
 
 \AddEverypageHook{%
@@ -23,7 +22,7 @@
     {Jemielity} % last name
     {Software Engineer} % job title
     {Warsaw, Poland} % location
-    {+01234567890} % phone
+    {+0123456789} % phone
     {email@example.com} % email
     {https://github.com/Matthew-Jemielity} % website
 }
@@ -36,35 +35,42 @@
     } (House MD)
   }
   \cvsection{areas of expertise}{san-marino}{%
-    lorem ipsum...
+    \begin{itemize}[leftmargin=2mm]
+      \item C (ISO/IEC 9899:1999)
+      \item autotools
+      \item GNU/Linux
+      \item DevOps
+    \end{itemize}
   }
   \cvsection{experience}{jellybean}{%
     \cvtimeline{\textbf{Senior Software Developer}, IS-Wireless}{deep-sky-blue}{2015}{now}{%
-      \begin{itemize}
-        \item responsible for architecture and implementation of 5G telecommunications software stack
+      \begin{itemize}[leftmargin=2mm]
+        \item designed architecture and implemented functionalities of 4G and 5G telecomm software stack
+        \item set up build-system and CI (Gerrit, Jenkins)
         \item customized open source eNB and UE implementations
       \end{itemize}
     }
-    \cvtimeline{\textbf{Software Engineer}, Samsung Electronics Poland R\&D Center}{curious-blue}{2013}{2015}{%
-      \begin{itemize}
+    \cvtimeline{\textbf{\{Junior,\} Software Engineer}, Samsung Electronics Poland R\&D Center}{curious-blue}{2009}{2015}{%
+    \begin{itemize}[leftmargin=2mm]
         \item developed Linux kernel drivers and userland applications for GNU/Linux
         \item contributed to projects ranging from performance benchmarking to structured light 3D scanning
         \item investigated performance- and power consumption-related issues in ARM-based embedded systems
-      \end{itemize}
-    }
-    \cvtimeline{\textbf{Junior Software Engineer}, Samsung Electronics Poland R\&D Center}{curious-blue}{2009}{2013}{%
-      \begin{itemize}
         \item implemented new features across proprietary bootloaders, L4-based RTOS, Android OS
         \item handled bringup of Linux kernel on new ARM-based hardware
-        \item responsible for debugging and porting exisitng projects to new devices
+        \item debugged and ported exisitng projects to new devices
+      \end{itemize}
+    }
+    \cvtimeline{\textbf{MSc Informatics}, University of Gdańsk}{curious-blue}{2004}{2009}{%
+      \begin{itemize}[leftmargin=2mm]
+        \item attended uniform magister-level courses
+        \item thesis: Turing machine in Conway's Game of Life
       \end{itemize}
     }
   }
   \cvsection{preferences}{hoki}{%
-    \begin{itemize}
+    \begin{itemize}[leftmargin=2mm]
       \item elastic work hours
       \item asynchronous communication
-      \item minimized problems with open-plan offices
     \end{itemize}
   }
 
