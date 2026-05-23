@@ -1,23 +1,24 @@
-all: pdf
+all: cv.pdf
 
-# need to compile aux, then recompile the desired format
-aux: latex
-	@echo "compiling latex"
-	@latex cv.tex 2>&1 >> build.log
-
-dvi: latex aux
-	@echo "compiling dvi"
-	@latex cv.tex 2>&1 >> build.log
-
-ps: dvi2ps aux dvi
-	@echo "compiling ps"
-	@dvi2ps -c cv.ps cv.dvi 2>&1 >> build.log
-
-pdf: pdflatex aux
-	@echo "compiling pdf"
+cv.pdf: cv.aux | pdflatex
+	@echo "compiling $@"
 	@pdflatex cv.tex 2>&1 >> build.log
 
-pdflatex: latex
+# need to compile aux, then recompile the desired format
+cv.aux: | latex
+	@echo "compiling $@"
+	@latex cv.tex 2>&1 >> build.log
+
+cv.dvi: cv.aux | latex
+	@echo "compiling $@"
+	@latex cv.tex 2>&1 >> build.log
+
+cv.ps: cv.dvi cv.aux | dvi2ps
+	@echo "compiling $@"
+	@dvi2ps -c cv.ps cv.dvi 2>&1 >> build.log
+
+#always check for software
+pdflatex: | latex
 	@echo "checking for pdflatex"
 	@command -v pdflatex 2>&1 >> build.log
 
