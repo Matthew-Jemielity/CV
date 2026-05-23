@@ -1,28 +1,33 @@
 all: pdf
 
 # need to compile aux, then recompile the desired format
-aux: .latex
-	@latex cv.tex
+aux: latex
+	@echo "compiling latex"
+	@latex cv.tex 2>&1 >> build.log
 
-dvi: .latex aux
-	@latex cv.tex
+dvi: latex aux
+	@echo "compiling dvi"
+	@latex cv.tex 2>&1 >> build.log
 
 ps: dvi2ps aux dvi
-	@dvi2ps -c cv.ps cv.dvi
+	@echo "compiling ps"
+	@dvi2ps -c cv.ps cv.dvi 2>&1 >> build.log
 
 pdf: pdflatex aux
-	@pdflatex cv.tex
+	@echo "compiling pdf"
+	@pdflatex cv.tex 2>&1 >> build.log
 
-pdflatex: .latex
+pdflatex: latex
+	@echo "checking for pdflatex"
+	@command -v pdflatex 2>&1 >> build.log
 
-.latex:
-	sudo add-apt-repository ppa:grand-edgemaster/texlive-backports
-	sudo apt-get update
-	sudo apt-get install texlive-full
-	touch .latex
+latex:
+	@echo "checking for latex"
+	@command -v latex 2>&1 >> build.log
 
 dvi2ps:
-	sudo apt-get install dvi2ps
+	@echo "checking for dvi2ps"
+	@command -v dvi2ps 2>&1 >> build.log
 
 clean:
 	@rm -f *.aux *.dvi *.log *.out *.pdf *.ps
